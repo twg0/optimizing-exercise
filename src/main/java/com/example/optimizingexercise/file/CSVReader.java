@@ -10,9 +10,22 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CSVReader {
-	public List<List<String>> readCSV() {
-		List<List<String>> csvList = new ArrayList<>();
-		File csv = new File("csv파일의 절대경로 입력");
+	private static CSVReader csvReader;
+	private static List<List<String>> csvList;
+
+	private CSVReader() {
+		readCSV();
+	}
+
+	public static CSVReader getInstance() {
+		if(csvReader == null)
+			csvReader = new CSVReader();
+		return csvReader;
+	}
+
+	private static void readCSV() {
+		csvList = new ArrayList<>();
+		File csv = new File("C:\\Users\\twg0\\Desktop\\Develop\\LikeLion\\optimizing-exercise\\src\\main\\resources\\csv\\k_soccer_player.csv");
 		BufferedReader br = null;
 		String line = "";
 
@@ -36,5 +49,10 @@ public class CSVReader {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public static List<List<String>> getCsvList() {
+		getInstance();
+		return csvList;
 	}
 }
