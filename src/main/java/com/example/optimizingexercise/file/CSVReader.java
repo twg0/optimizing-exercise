@@ -9,22 +9,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CSVReader {
-	private static CSVReader csvReader;
-	private static List<List<String>> csvList;
+import org.springframework.stereotype.Component;
 
-	private CSVReader() {
+@Component
+public class CSVReader {
+	private List<List<String>> csvList;
+
+	protected CSVReader() {
 		readCSV();
 	}
 
-	public static CSVReader getInstance() {
-		if(csvReader == null)
-			csvReader = new CSVReader();
-		return csvReader;
-	}
-
-	private static void readCSV() {
-		csvList = new ArrayList<>();
+	private void readCSV() {
+		this.csvList = new ArrayList<>();
 		File csv = new File("C:\\Users\\twg0\\Desktop\\Develop\\LikeLion\\optimizing-exercise\\src\\main\\resources\\csv\\k_soccer_player.csv");
 		BufferedReader br = null;
 		String line = "";
@@ -34,7 +30,7 @@ public class CSVReader {
 			while ((line = br.readLine()) != null) {
 				String[] lineArr = line.split(",");
 				List<String> aLine = Arrays.asList(lineArr);
-				csvList.add(aLine);
+				this.csvList.add(aLine);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -51,8 +47,7 @@ public class CSVReader {
 		}
 	}
 
-	public static List<List<String>> getCsvList() {
-		getInstance();
-		return csvList;
+	public List<List<String>> getCsvList() {
+		return this.csvList;
 	}
 }
