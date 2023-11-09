@@ -26,4 +26,12 @@ public class Club {
 
 	@OneToMany(mappedBy = "club")
 	private List<Account> accounts = new ArrayList<>();
+
+	public void setMember(Member member) {
+		this.members.add(member);
+	}
+
+	public void setAccount(Account account) {
+		this.accounts.add(account);
+	}
 }
