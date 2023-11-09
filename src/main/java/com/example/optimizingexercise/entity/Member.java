@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -35,6 +36,23 @@ public class Member {
 	private Integer goal;
 	private Integer assist;
 
+	@Builder
+	private Member(Long id, String userName, String birth, Integer height, Integer weight, String nationality,
+		String teamName, String position, Integer backNumber, Integer inGame, Integer goal, Integer assist) {
+		this.id = id;
+		this.userName = userName;
+		this.birth = birth;
+		this.height = height;
+		this.weight = weight;
+		this.nationality = nationality;
+		this.teamName = teamName;
+		this.position = position;
+		this.backNumber = backNumber;
+		this.inGame = inGame;
+		this.goal = goal;
+		this.assist = assist;
+	}
+
 	/* 연관 관계 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "club_id")
@@ -42,4 +60,13 @@ public class Member {
 
 	@OneToMany(mappedBy = "member")
 	private List<Account> accounts = new ArrayList<>();
+
+	public void setAccount(Account account) {
+		this.accounts.add(account);
+	}
+
+	public void setClub(Club club) {
+		this.club = club;
+		club.setMember(this);
+	}
 }
