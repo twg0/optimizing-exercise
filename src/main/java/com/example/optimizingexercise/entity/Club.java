@@ -3,11 +3,14 @@ package com.example.optimizingexercise.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.optimizingexercise.dto.ClubDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -33,5 +36,16 @@ public class Club {
 
 	public void setAccount(Account account) {
 		this.accounts.add(account);
+	}
+
+	@Builder
+	private Club(String clubName) {
+		this.clubName = clubName;
+	}
+
+	public static Club createClub(ClubDTO clubDTO) {
+		return Club.builder()
+			.clubName(clubDTO.getClubName())
+			.build();
 	}
 }

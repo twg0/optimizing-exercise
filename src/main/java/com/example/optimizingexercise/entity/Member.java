@@ -3,6 +3,8 @@ package com.example.optimizingexercise.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.optimizingexercise.dto.MemberDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -37,9 +39,8 @@ public class Member {
 	private Integer assist;
 
 	@Builder
-	private Member(Long id, String userName, String birth, Integer height, Integer weight, String nationality,
+	private Member(String userName, String birth, Integer height, Integer weight, String nationality,
 		String teamName, String position, Integer backNumber, Integer inGame, Integer goal, Integer assist) {
-		this.id = id;
 		this.userName = userName;
 		this.birth = birth;
 		this.height = height;
@@ -68,5 +69,21 @@ public class Member {
 	public void setClub(Club club) {
 		this.club = club;
 		club.setMember(this);
+	}
+
+	public static Member createMember(MemberDTO memberDTO) {
+		return Member.builder()
+			.userName(memberDTO.getUserName())
+			.birth(memberDTO.getBirth())
+			.height(memberDTO.getHeight())
+			.weight(memberDTO.getWeight())
+			.nationality(memberDTO.getNationality())
+			.teamName(memberDTO.getTeamName())
+			.position(memberDTO.getPosition())
+			.backNumber(memberDTO.getBackNumber())
+			.inGame(memberDTO.getInGame())
+			.goal(memberDTO.getGoal())
+			.assist(memberDTO.getAssist())
+			.build();
 	}
 }
