@@ -3,7 +3,9 @@ package com.example.optimizingexercise.dto;
 import com.example.optimizingexercise.entity.Member;
 
 import lombok.Builder;
+import lombok.Getter;
 
+@Getter
 @Builder
 public class MemberDTO {
 	private Long id;
