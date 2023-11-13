@@ -4,7 +4,9 @@ import com.example.optimizingexercise.entity.Account;
 
 import jakarta.persistence.Column;
 import lombok.Builder;
+import lombok.Getter;
 
+@Getter
 @Builder
 public class AccountDTO {
 	private Long id;
