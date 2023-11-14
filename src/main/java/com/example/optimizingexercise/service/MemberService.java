@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.optimizingexercise.dto.MemberDTO;
+import com.example.optimizingexercise.dto.MemberRequest;
 import com.example.optimizingexercise.entity.Club;
 import com.example.optimizingexercise.entity.Member;
 import com.example.optimizingexercise.repository.ClubRepository;
@@ -22,10 +23,15 @@ public class MemberService {
 	private final MemberRepository memberRepository;
 	private final ClubRepository clubRepository;
 
-	public MemberDTO create(MemberDTO memberDTO, Long clubId) {
-		Member save = memberRepository.save(Member.createMember(memberDTO));
+	public MemberDTO create(MemberRequest memberRequest, Long clubId) {
+		Member save = memberRepository.save(Member.createMember(memberRequest));
 		Club club = clubRepository.findById(clubId).get();
 		save.setClub(club);
 		return MemberDTO.fromEntity(save);
+	}
+
+	public MemberDTO readById(Long id) {
+		Optional<Member> byId = memberRepository.findById(id);
+		return MemberDTO.fromEntity(byId.get());
 	}
 }

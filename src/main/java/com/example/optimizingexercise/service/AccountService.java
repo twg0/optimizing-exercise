@@ -39,4 +39,9 @@ public class AccountService {
 		}
 		return AccountDTO.fromEntity(save);
 	}
+
+	public AccountDTO readById(Long id) {
+		Optional<Account> byId = accountRepository.findById(id);
+		return AccountDTO.fromEntity(byId.get());
+	}
 }
