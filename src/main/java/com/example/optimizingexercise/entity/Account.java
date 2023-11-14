@@ -39,6 +39,16 @@ public class Account {
 	@JoinColumn(name = "club_id")
 	private Club club;
 
+	public void setClub(Club club) {
+		club.setAccount(this);
+		this.club = club;
+	}
+
+	public void setMember(Member member) {
+		member.setAccount(this);
+		this.member = member;
+	}
+
 	@Builder
 	private Account(String account_number, Long money, Member member, Club club) {
 		this.account_number = account_number;
