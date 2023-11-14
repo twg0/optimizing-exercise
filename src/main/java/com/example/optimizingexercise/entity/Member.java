@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.optimizingexercise.dto.MemberDTO;
+import com.example.optimizingexercise.dto.MemberRequest;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -71,19 +72,19 @@ public class Member {
 		club.setMember(this);
 	}
 
-	public static Member createMember(MemberDTO memberDTO) {
+	public static Member createMember(MemberRequest memberRequest) {
 		return Member.builder()
-			.userName(memberDTO.getUserName())
-			.birth(memberDTO.getBirth())
-			.height(memberDTO.getHeight())
-			.weight(memberDTO.getWeight())
-			.nationality(memberDTO.getNationality())
-			.teamName(memberDTO.getTeamName())
-			.position(memberDTO.getPosition())
-			.backNumber(memberDTO.getBackNumber())
-			.inGame(memberDTO.getInGame())
-			.goal(memberDTO.getGoal())
-			.assist(memberDTO.getAssist())
+			.userName(memberRequest.getUserName())
+			.birth(memberRequest.getBirth())
+			.height(memberRequest.getHeight())
+			.weight(memberRequest.getWeight())
+			.nationality(memberRequest.getNationality())
+			.teamName(memberRequest.getTeamName())
+			.position(memberRequest.getPosition())
+			.backNumber(memberRequest.getBackNumber())
+			.inGame(memberRequest.getInGame())
+			.goal(memberRequest.getGoal())
+			.assist(memberRequest.getAssist())
 			.build();
 	}
 }

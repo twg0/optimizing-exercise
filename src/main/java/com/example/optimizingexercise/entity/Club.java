@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.optimizingexercise.dto.ClubDTO;
+import com.example.optimizingexercise.dto.ClubRequest;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -21,6 +23,7 @@ public class Club {
 	@Id @GeneratedValue
 	private Long id;
 
+	@Column(unique = true)
 	private String clubName;
 
 	/* 연관 관계 */
@@ -43,9 +46,9 @@ public class Club {
 		this.clubName = clubName;
 	}
 
-	public static Club createClub(ClubDTO clubDTO) {
+	public static Club createClub(ClubRequest clubRequest) {
 		return Club.builder()
-			.clubName(clubDTO.getClubName())
+			.clubName(clubRequest.getClubName())
 			.build();
 	}
 }
