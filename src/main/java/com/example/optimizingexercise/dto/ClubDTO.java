@@ -12,7 +12,7 @@ public class ClubDTO {
 	private Long id;
 	private String clubName;
 
-	public ClubDTO fromEntity(Club club) {
+	public static ClubDTO fromEntity(Club club) {
 		return ClubDTO.builder()
 			.id(club.getId())
 			.clubName(club.getClubName())

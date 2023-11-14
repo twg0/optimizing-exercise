@@ -23,7 +23,7 @@ public class MemberDTO {
 	private Integer goal;
 	private Integer assist;
 
-	public MemberDTO fromEntity(Member member) {
+	public static MemberDTO fromEntity(Member member) {
 		return MemberDTO.builder()
 			.id(member.getId())
 			.userName(member.getUserName())

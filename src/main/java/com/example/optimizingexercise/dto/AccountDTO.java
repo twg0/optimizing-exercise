@@ -13,7 +13,7 @@ public class AccountDTO {
 	private String account_number;
 	private Long money;
 
-	public AccountDTO fromEntity(Account account) {
+	public static AccountDTO fromEntity(Account account) {
 		return AccountDTO.builder()
 			.id(account.getId())
 			.account_number(account.getAccount_number())
