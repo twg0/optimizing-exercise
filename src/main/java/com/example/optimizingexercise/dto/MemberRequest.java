@@ -8,9 +8,8 @@ import lombok.Getter;
 @Getter
 @Builder
 public class MemberRequest {
-	private Long id;
-
 	private String userName;
+	private Integer age;
 	private String birth;
 	private Integer height;
 	private Integer weight;

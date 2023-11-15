@@ -8,7 +8,5 @@ import lombok.Getter;
 @Getter
 @Builder
 public class ClubRequest {
-
-	private Long id;
 	private String clubName;
 }
