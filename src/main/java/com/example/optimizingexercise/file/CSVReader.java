@@ -8,17 +8,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
+
+import jakarta.annotation.PostConstruct;
 
 @Component
 public class CSVReader {
 	private List<List<String>> csvList;
 
-	protected CSVReader() {
-		readCSV();
-	}
-
+	@PostConstruct
 	private void readCSV() {
 		this.csvList = new ArrayList<>();
 		File csv = new File("C:\\Users\\twg0\\Desktop\\Develop\\LikeLion\\optimizing-exercise\\src\\main\\resources\\csv\\k_soccer_player.csv");
@@ -29,7 +29,7 @@ public class CSVReader {
 			br = new BufferedReader(new FileReader(csv));
 			while ((line = br.readLine()) != null) {
 				String[] lineArr = line.split(",");
-				List<String> aLine = Arrays.asList(lineArr);
+				List<String> aLine = Arrays.stream(lineArr).collect(Collectors.toList());
 				this.csvList.add(aLine);
 			}
 		} catch (FileNotFoundException e) {
