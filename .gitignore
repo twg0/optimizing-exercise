@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 
 **/csv/
+application.yml
 
 ### STS ###
 .apt_generated
