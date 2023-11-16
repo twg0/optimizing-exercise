@@ -20,5 +20,6 @@ public class MemberRequest {
 	private Integer backNumber;
 	private Integer inGame;
 	private Integer goal;
+	private Integer year;
 	private Integer assist;
 }
