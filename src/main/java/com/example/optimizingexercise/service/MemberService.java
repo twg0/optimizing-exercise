@@ -23,9 +23,9 @@ public class MemberService {
 	private final MemberRepository memberRepository;
 	private final ClubRepository clubRepository;
 
-	public MemberDTO create(MemberRequest memberRequest, Long clubId) {
+	public MemberDTO create(MemberRequest memberRequest, String clubName) {
 		Member save = memberRepository.save(Member.createMember(memberRequest));
-		Club club = clubRepository.findById(clubId).get();
+		Club club = clubRepository.findByClubName(clubName).get();
 		save.setClub(club);
 		return MemberDTO.fromEntity(save);
 	}
