@@ -21,6 +21,7 @@ public class MemberDTO {
 	private Integer backNumber;
 	private Integer inGame;
 	private Integer goal;
+	private Integer year;
 	private Integer assist;
 
 	public static MemberDTO fromEntity(Member member) {
@@ -34,6 +35,7 @@ public class MemberDTO {
 			.teamName(member.getTeamName())
 			.position(member.getPosition())
 			.backNumber(member.getBackNumber())
+			.year(member.getYear())
 			.inGame(member.getInGame())
 			.goal(member.getGoal())
 			.assist(member.getAssist())
