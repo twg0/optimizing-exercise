@@ -27,6 +27,8 @@ public class Member {
 	private Long id;
 
 	private String userName;
+	private Integer year;
+	private Integer age;
 	private String birth;
 	private Integer height;
 	private Integer weight;
@@ -40,9 +42,11 @@ public class Member {
 	private Integer assist;
 
 	@Builder
-	private Member(String userName, String birth, Integer height, Integer weight, String nationality,
+	private Member(String userName, Integer year,Integer age,String birth, Integer height, Integer weight, String nationality,
 		String teamName, String position, Integer backNumber, Integer inGame, Integer goal, Integer assist) {
 		this.userName = userName;
+		this.year = year;
+		this.age = age;
 		this.birth = birth;
 		this.height = height;
 		this.weight = weight;
@@ -75,13 +79,14 @@ public class Member {
 	public static Member createMember(MemberRequest memberRequest) {
 		return Member.builder()
 			.userName(memberRequest.getUserName())
-			.birth(memberRequest.getBirth())
-			.height(memberRequest.getHeight())
-			.weight(memberRequest.getWeight())
-			.nationality(memberRequest.getNationality())
 			.teamName(memberRequest.getTeamName())
-			.position(memberRequest.getPosition())
 			.backNumber(memberRequest.getBackNumber())
+			.birth(memberRequest.getBirth())
+			.position(memberRequest.getPosition())
+			.nationality(memberRequest.getNationality())
+			.weight(memberRequest.getWeight())
+			.height(memberRequest.getHeight())
+			.year(memberRequest.getYear())
 			.inGame(memberRequest.getInGame())
 			.goal(memberRequest.getGoal())
 			.assist(memberRequest.getAssist())
