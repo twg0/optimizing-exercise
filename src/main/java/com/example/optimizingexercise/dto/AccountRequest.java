@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class AccountRequest {
-	private String account_number;
+	private String accountNumber;
 	private Long money;
 
 }

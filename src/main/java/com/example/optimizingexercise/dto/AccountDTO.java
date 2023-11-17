@@ -16,7 +16,7 @@ public class AccountDTO {
 	public static AccountDTO fromEntity(Account account) {
 		return AccountDTO.builder()
 			.id(account.getId())
-			.account_number(account.getAccount_number())
+			.account_number(account.getAccountNumber())
 			.money(account.getMoney())
 			.build();
 	}
