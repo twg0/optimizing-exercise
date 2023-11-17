@@ -1,5 +1,6 @@
 package com.example.optimizingexercise.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -26,10 +27,10 @@ public class AccountService {
 	private final MemberRepository memberRepository;
 	private final ClubRepository clubRepository;
 
-	public AccountDTO create(AccountRequest accountRequest, Long memberId, Long clubId) {
+	public AccountDTO create(AccountRequest accountRequest, Long memberId, String clubName) {
 		Account save = null;
 		if(memberId == null) {
-			Club club = clubRepository.findById(clubId).get();
+			Club club = clubRepository.findByClubName(clubName).get();
 			save = accountRepository.save(Account.createAccount(accountRequest, null, club));
 			save.setClub(club);
 		} else {
@@ -43,5 +44,17 @@ public class AccountService {
 	public AccountDTO readById(Long id) {
 		Optional<Account> byId = accountRepository.findById(id);
 		return AccountDTO.fromEntity(byId.get());
+	}
+
+	/**
+	 * 전체 구단에 입금
+	 */
+	public void depositToAllClub(Long money) {
+		log.info("전체 {}원 입금", money);
+		List<Account> all = accountRepository.findAll();
+		for (Account account : all) {
+			account.deposit(money);
+		}
+		log.info("입금 완료");
 	}
 }
