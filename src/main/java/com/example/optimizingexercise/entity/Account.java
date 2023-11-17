@@ -27,7 +27,7 @@ public class Account {
 	private Long id;
 
 	@Column(unique = true)
-	private String account_number;
+	private String accountNumber;
 	private Long money;
 
 	/* 연관 관계 */
@@ -50,8 +50,8 @@ public class Account {
 	}
 
 	@Builder
-	private Account(String account_number, Long money, Member member, Club club) {
-		this.account_number = account_number;
+	private Account(String accountNumber, Long money, Member member, Club club) {
+		this.accountNumber = accountNumber;
 		this.money = money;
 		this.member = member;
 		this.club = club;
@@ -59,10 +59,26 @@ public class Account {
 
 	public static Account createAccount(AccountRequest accountRequest, Member member, Club club) {
 		return Account.builder()
-			.account_number(accountRequest.getAccount_number())
+			.accountNumber(accountRequest.getAccountNumber())
 			.money(accountRequest.getMoney())
 			.member(member)
 			.club(club)
 			.build();
+	}
+
+	/**
+	 * 입금
+	 */
+	public Long deposit(Long money) {
+		this.money += money;
+		return this.money;
+	}
+
+	/**
+	 * 출금
+	 */
+	public Long withdraw(Long money) {
+		this.money -= money;
+		return this.money;
 	}
 }
