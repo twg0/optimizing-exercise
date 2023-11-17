@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.optimizingexercise.dto.AccountRequest;
+import com.example.optimizingexercise.dto.ClubDTO;
 import com.example.optimizingexercise.dto.ClubRequest;
+import com.example.optimizingexercise.dto.MemberDTO;
 import com.example.optimizingexercise.dto.MemberRequest;
 import com.example.optimizingexercise.repository.ClubRepository;
 import com.example.optimizingexercise.service.AccountService;
@@ -36,32 +39,46 @@ public class FileService {
 			if(strings.get(0).equals("이름")) continue;
 			String clubName = strings.get(9);
 			if(!clubRepository.existsByClubName(clubName)) {
-				clubService.create(
+				ClubDTO clubDTO = clubService.create(
 					ClubRequest.builder()
 						.clubName(clubName)
 						.build()
+				);
+				accountService.create(
+					AccountRequest.builder()
+						.accountNumber("" + clubName + clubDTO.getId())
+						.money(0L)
+						.build()
+					,null, clubName
 				);
 			}
 			log.info("line " + i++);
 			while(strings.size() < 13) {
 				strings.add("-1");
 			}
-			memberService.create(
+			MemberDTO memberDTO = memberService.create(
 				MemberRequest.builder()
 					.userName(strings.get(0))
 					.teamName(strings.get(1))
-					.backNumber(Integer.parseInt(strings.get(2).equals("") ? "-1":strings.get(2).replaceAll(" ","")))
+					.backNumber(Integer.parseInt(strings.get(2).equals("") ? "-1" : strings.get(2).replaceAll(" ", "")))
 					.birth(strings.get(3))
-					.height(Integer.parseInt(strings.get(4).equals("") ? "-1":strings.get(4).replaceAll(" ","")))
+					.height(Integer.parseInt(strings.get(4).equals("") ? "-1" : strings.get(4).replaceAll(" ", "")))
 					.position(strings.get(5))
 					.nationality(strings.get(6))
-					.weight(Integer.parseInt(strings.get(7).equals("") ? "-1":strings.get(7).replaceAll(" ","")))
-					.year(Integer.parseInt(strings.get(8).equals("") ? "-1":strings.get(8).replaceAll(" ","")))
-					.inGame(Integer.parseInt(strings.get(10).equals("") ? "-1":strings.get(10).replaceAll(" ","")))
-					.goal(Integer.parseInt(strings.get(11).equals("") ? "-1":strings.get(11).replaceAll(" ","")))
-					.assist(Integer.parseInt(strings.get(12).equals("") ? "-1":strings.get(12).replaceAll(" ","")))
+					.weight(Integer.parseInt(strings.get(7).equals("") ? "-1" : strings.get(7).replaceAll(" ", "")))
+					.year(Integer.parseInt(strings.get(8).equals("") ? "-1" : strings.get(8).replaceAll(" ", "")))
+					.inGame(Integer.parseInt(strings.get(10).equals("") ? "-1" : strings.get(10).replaceAll(" ", "")))
+					.goal(Integer.parseInt(strings.get(11).equals("") ? "-1" : strings.get(11).replaceAll(" ", "")))
+					.assist(Integer.parseInt(strings.get(12).equals("") ? "-1" : strings.get(12).replaceAll(" ", "")))
 					.build()
 				, clubName
+			);
+			accountService.create(
+				AccountRequest.builder()
+					.accountNumber("" + memberDTO.getUserName() + memberDTO.getId())
+					.money(0L)
+					.build()
+				, null, clubName
 			);
 		}
 		log.info("setUp 끝");
